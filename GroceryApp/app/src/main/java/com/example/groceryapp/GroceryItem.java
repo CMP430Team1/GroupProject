@@ -19,11 +19,17 @@ public class GroceryItem {
     @ColumnInfo(name = "Item_Description")
     private String itemDescription;
 
-    public GroceryItem(@NonNull String name, @NonNull double price, @NonNull String description){
-        itemName        = name;
-        itemPrice       = price;
-        itemDescription = description;
+    public GroceryItem(@NonNull String itemName, double itemPrice, String itemDescription) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemDescription = itemDescription;
     }
+
+    //    public GroceryItem(@NonNull String name, @NonNull double price, @NonNull String description){
+//        itemName        = name;
+//        itemPrice       = price;
+//        itemDescription = description;
+//    }
 
     public String getItemName(){
         return itemName;

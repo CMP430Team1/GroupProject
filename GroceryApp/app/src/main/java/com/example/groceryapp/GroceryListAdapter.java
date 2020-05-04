@@ -28,17 +28,28 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroceryListAdapter.GroceryViewHolder holder, int position) {
+    public void onBindViewHolder(GroceryViewHolder holder, int position) {
+        if(mGroceryItems != null){
+            GroceryItem current = mGroceryItems.get(position);
+            holder.GroceryItemName.setText(current.getItemName());
+            holder.GroceryItemPrice.setText(String.valueOf(current.getItemPrice()));
+            holder.GroceryItemDescription.setText(current.getItemDescription());
+        }
+    }
 
+    void setGroceryItems(List<GroceryItem> gItems){
+        mGroceryItems = gItems;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        if(mGroceryItems) // <-----Finish this method
-        return 0;
+        if(mGroceryItems != null)
+            return mGroceryItems.size();// <-----Finish this method
+        else return 0;
     }
 
-    private class GroceryViewHolder extends RecyclerView.ViewHolder {
+    /*public */ class GroceryViewHolder extends RecyclerView.ViewHolder {
         private TextView GroceryItemName;
         private TextView GroceryItemPrice;
         private TextView GroceryItemDescription;

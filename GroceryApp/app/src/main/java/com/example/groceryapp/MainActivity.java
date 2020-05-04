@@ -7,12 +7,22 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private GroceryViewModel mGroceryViewModel;
+    //GroceryListAdapter adapter = new GroceryListAdapter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final GroceryListAdapter adapter = new GroceryListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mGroceryViewModel = ViewModelProviders.of(this).get(GroceryViewModel.class);
+        mGroceryViewModel.getAllGroceryItems().observe(this, new Observer<List<GroceryItem>>(){
+            @Override
+            public void onChanged(List<GroceryItem> groceryItems) {
+                adapter.setGroceryItems(groceryItems);
+            }
+        });
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

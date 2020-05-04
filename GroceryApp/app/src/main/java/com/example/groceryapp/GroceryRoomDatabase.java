@@ -1,10 +1,13 @@
 package com.example.groceryapp;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {GroceryItem.class}, version = 1, exportSchema = false)
 public abstract class GroceryRoomDatabase extends RoomDatabase {
@@ -22,10 +25,49 @@ public abstract class GroceryRoomDatabase extends RoomDatabase {
                             //wipes & rebuilds instead of migrating
                             // look into migration
                             .fallbackToDestructiveMigration()
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
+    }
+
+    private static GroceryRoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback(){
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+            };
+
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+
+        private final GroceryDao mDao;
+        GroceryItem[] items = createItemList();
+
+        public GroceryItem[] createItemList(){
+            GroceryItem[] itemList = new GroceryItem[10];
+            for(int i = 0; i < itemList.length; i++){
+                itemList[i] = new GroceryItem("Peas # " + i, (double)i, "This is peas # " + i);
+            }
+            return itemList;
+        }
+
+        public PopulateDbAsync(GroceryRoomDatabase db) {
+            mDao = db.groceryDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mDao.deleteAll();
+
+            for(int i = 0; i <= items.length - 1; i++){
+                mDao.insert(items[i]);
+            }
+
+            return null;
+        }
     }
 }
