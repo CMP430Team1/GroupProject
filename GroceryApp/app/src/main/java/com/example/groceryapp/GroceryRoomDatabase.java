@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {GroceryItem.class}, version = 1, exportSchema = false)
+@Database(entities = {GroceryItem.class}, version = 2, exportSchema = false)
 public abstract class GroceryRoomDatabase extends RoomDatabase {
     public abstract GroceryDao groceryDao();
 
@@ -48,9 +48,17 @@ public abstract class GroceryRoomDatabase extends RoomDatabase {
         GroceryItem[] items = createItemList();
 
         public GroceryItem[] createItemList(){
-            GroceryItem[] itemList = new GroceryItem[10];
+            GroceryItem[] itemList = new GroceryItem[30];
             for(int i = 0; i < itemList.length; i++){
-                itemList[i] = new GroceryItem("Peas # " + i, (double)i, "This is peas # " + i);
+                if(i <= 10){
+                    itemList[i] = new GroceryItem("Peas # " + i, (double)i, "frozen","This is peas # " + i);
+                }
+                if(i > 10 && i <= 20){
+                    itemList[i] = new GroceryItem("Bread # " + i, (double)i, "fresh","This is Bread # " + i);
+                }
+                if(i > 20 && i <= 30){
+                    itemList[i] = new GroceryItem("Beans # " + i, (double)i, "canned","This is Beans # " + i);
+                }
             }
             return itemList;
         }

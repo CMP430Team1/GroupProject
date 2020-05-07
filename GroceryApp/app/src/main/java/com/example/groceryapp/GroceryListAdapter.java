@@ -18,6 +18,7 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
 
     GroceryListAdapter(Context context){
         mInflater = LayoutInflater.from(context);
+       // mGroceryItems = data;
     }
 
     @NonNull

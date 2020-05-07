@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
 import android.view.Menu;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        /*RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final GroceryListAdapter adapter = new GroceryListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,6 +43,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<GroceryItem> groceryItems) {
                 adapter.setGroceryItems(groceryItems);
+            }
+        });*/
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Frozen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Fresh"));
+        tabLayout.addTab(tabLayout.newTab().setText("Canned"));
+
+
+        final ViewPager viewPager = findViewById(R.id.viewPager);
+        final ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),
+                tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 

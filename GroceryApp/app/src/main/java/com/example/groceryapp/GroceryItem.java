@@ -16,12 +16,16 @@ public class GroceryItem {
     @ColumnInfo(name = "Item_Price")
     private double itemPrice;
 
+    @ColumnInfo(name = "Item_Category")
+    private String itemCategory;
+
     @ColumnInfo(name = "Item_Description")
     private String itemDescription;
 
-    public GroceryItem(@NonNull String itemName, double itemPrice, String itemDescription) {
+    public GroceryItem(@NonNull String itemName, double itemPrice, String itemCategory, String itemDescription) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.itemCategory = itemCategory;
         this.itemDescription = itemDescription;
     }
 
@@ -39,9 +43,14 @@ public class GroceryItem {
         return itemPrice;
     }
 
+    public String getItemCategory(){
+        return itemCategory;
+    }
+
     public String getItemDescription(){
         return itemDescription;
     }
+
 
     public void setItemName(String newName){
         itemName =  newName;
@@ -49,6 +58,10 @@ public class GroceryItem {
 
     public void setItemPrice(double newPrice){
         itemPrice = newPrice;
+    }
+
+    public void setItemCategory(String newCategory){
+        itemCategory = newCategory;
     }
 
     public void setItemDescription(String newDescription){

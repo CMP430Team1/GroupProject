@@ -49,4 +49,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$arch_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version" //2.2.0'
+
+    //TabLayout dependency
+    implementation 'com.android.support:design:28.0.0'
 }

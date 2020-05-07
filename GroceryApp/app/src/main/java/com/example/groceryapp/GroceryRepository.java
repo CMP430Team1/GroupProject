@@ -11,15 +11,38 @@ public class GroceryRepository {
     private GroceryDao mGroceryDao;
     private LiveData<List<GroceryItem>> mAllGrocery;
 
+    private LiveData<List<GroceryItem>> mAllFrozenGrocery;
+    private LiveData<List<GroceryItem>> mAllFreshGrocery;
+    private LiveData<List<GroceryItem>> mAllCannedGrocery;
+
     GroceryRepository(Application application){
         GroceryRoomDatabase db = GroceryRoomDatabase.getDatabase(application);
         mGroceryDao            = db.groceryDao();
         mAllGrocery            = mGroceryDao.getAllItems();
+
+        mAllFrozenGrocery      = mGroceryDao.getAllFrozenItems("frozen");
+        mAllFreshGrocery       = mGroceryDao.getAllFreshItems("fresh");
+        mAllCannedGrocery      = mGroceryDao.getAllCannedItems("canned");
     }
+
 
     LiveData<List<GroceryItem>> getAllGroceryItems(){
         return mAllGrocery;
     }
+
+    LiveData<List<GroceryItem>> getAllFrozenGroceryItems() {
+        return mAllFrozenGrocery;
+    }
+
+    LiveData<List<GroceryItem>> getAllFreshGroceryItems() {
+        return mAllFreshGrocery;
+    }
+
+    LiveData<List<GroceryItem>> getAllCannedGroceryItems() {
+        return mAllCannedGrocery;
+    }
+
+
 
     public void insert(GroceryItem item){
         new insertAsyncTask(mGroceryDao).execute(item);
