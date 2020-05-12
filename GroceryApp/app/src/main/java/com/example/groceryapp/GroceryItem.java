@@ -3,13 +3,16 @@ package com.example.groceryapp;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "groceryItem_table")
 public class GroceryItem {
 
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     @ColumnInfo(name = "Item_Name")
     private String itemName;
 
@@ -34,6 +37,15 @@ public class GroceryItem {
 //        itemPrice       = price;
 //        itemDescription = description;
 //    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getItemName(){
         return itemName;

@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {GroceryItem.class}, version = 2, exportSchema = false)
+@Database(entities = {GroceryItem.class, UserCart.class}, version = 3, exportSchema = false)
+@TypeConverters(Converters.class)
 public abstract class GroceryRoomDatabase extends RoomDatabase {
     public abstract GroceryDao groceryDao();
+    public abstract CartDao cartDao();
 
     private static GroceryRoomDatabase INSTANCE;
 
@@ -21,7 +24,7 @@ public abstract class GroceryRoomDatabase extends RoomDatabase {
                 if(INSTANCE == null){
                     // Create DB here
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            GroceryRoomDatabase.class, "groceryItem_database")
+                            GroceryRoomDatabase.class, "groceryApp_database")
                             //wipes & rebuilds instead of migrating
                             // look into migration
                             .fallbackToDestructiveMigration()

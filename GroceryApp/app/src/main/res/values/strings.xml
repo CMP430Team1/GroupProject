@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="itemName_text">Frozen peas</string>
     <string name="itemPrice_text">$3.50</string>
+    <string name="optionsMenu_Cart_Title">Cart</string>
+    <string name="cartCheckoutButton_text">Checkout</string>
 </resources>

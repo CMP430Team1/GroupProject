@@ -1,5 +1,6 @@
 package com.example.groceryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -97,13 +99,29 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        switch(item.getItemId()){
+            case R.id.action_cart:
+                Toast.makeText(this, "Clicked on Cart", Toast.LENGTH_SHORT).show();
+                goToCart();
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(this, "Clicked on Settings", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                // Do nothing
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToCart(){
+        Intent goIntent = new Intent(this, CartActivity.class);
+        startActivity(goIntent);
     }
 }
