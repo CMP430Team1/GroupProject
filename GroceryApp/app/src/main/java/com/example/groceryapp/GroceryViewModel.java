@@ -17,13 +17,18 @@ public class GroceryViewModel extends AndroidViewModel {
     private LiveData<List<GroceryItem>> mAllFreshItems;
     private LiveData<List<GroceryItem>> mAllCannedItems;
 
+    private LiveData<List<UserCart>> mAllCartItems;         //<--- changes
+
+
     public GroceryViewModel(@NonNull Application application) {
         super(application);
         mRepository      = new GroceryRepository(application);
         mAllGroceryItems = mRepository.getAllGroceryItems();
-        mAllFrozenItems = mRepository.getAllFrozenGroceryItems();
-        mAllFreshItems = mRepository.getAllFreshGroceryItems();
-        mAllCannedItems = mRepository.getAllCannedGroceryItems();
+        mAllFrozenItems  = mRepository.getAllFrozenGroceryItems();
+        mAllFreshItems   = mRepository.getAllFreshGroceryItems();
+        mAllCannedItems  = mRepository.getAllCannedGroceryItems();
+
+        mAllCartItems    = mRepository.getAllUserCartItems();
     }
 
     LiveData<List<GroceryItem>> getAllGroceryItems(){
@@ -42,7 +47,15 @@ public class GroceryViewModel extends AndroidViewModel {
         return  mAllCannedItems;
     }
 
+    LiveData<List<UserCart>> getAllCartItems(){
+        return mAllCartItems;
+    }    //<--changes
+
     public void insert(GroceryItem item){
         mRepository.insert(item);
+    }
+
+    public void insertToCart(GroceryItem item){
+        mRepository.insertToCart(item);
     }
 }

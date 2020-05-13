@@ -2,49 +2,42 @@ package com.example.groceryapp;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity(tableName = "userCart_Table")
 public class UserCart {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    protected int cartId;
 
-   // @NonNull
+    /*//@TypeConverters(Converters.class)
     @ColumnInfo(name = "Grocery_Item")
-    private GroceryItem product;
+    protected GroceryItem product;
 
     @ColumnInfo(name = "Item_Quantity")
-    private int quantity;
+    protected int quantity;*/
 
-    public UserCart(GroceryItem product, int quantity) {
-        this.product = product;
+    @ColumnInfo(name = "ItemName")
+    protected String item;
+
+    @ColumnInfo(name = "ItemPrice")
+    protected double price;
+
+    @ColumnInfo(name = "Quantity")
+    protected int quantity;
+
+    public UserCart(String item, double price, int quantity) {
+        this.item = item;
+        this.price = price;
         this.quantity = quantity;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @NonNull
-    public GroceryItem getProduct() {
-        return product;
-    }
-
-    public void setProduct(@NonNull GroceryItem product) {
+    /*public UserCart(GroceryItem product, int quantity) {
         this.product = product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
+    }*/
+
 }

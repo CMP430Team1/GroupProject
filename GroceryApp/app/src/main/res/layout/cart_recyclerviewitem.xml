@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:contentPadding="8dp"
-    android:padding="8dp">
+    android:layout_margin="@dimen/cardView_margin">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -3,8 +3,11 @@ package com.example.groceryapp;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
@@ -15,8 +18,13 @@ public interface CartDao {
     @Insert
     void insert(GroceryItem item);
 
-//    @Query("SELECT Grocery_Item, item_Quantity FROM userCart_Table ORDER BY Grocery_Item ASC")
-//    LiveData<List<GroceryItem>> getAllItems();
+    @Transaction
+    @Query("SELECT * FROM userCart_Table")
+    LiveData<List<CartWithGroceryItem>> getAllCartWithGroceryItems();
+
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT * FROM userCart_Table")
+    LiveData<List<UserCart>> getAllItems();
 
 //    @Update
 //    void update();                              //<------- Finish this class

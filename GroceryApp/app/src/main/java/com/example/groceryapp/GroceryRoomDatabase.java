@@ -10,8 +10,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {GroceryItem.class, UserCart.class}, version = 3, exportSchema = false)
-@TypeConverters(Converters.class)
+@Database(entities = {GroceryItem.class, UserCart.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class GroceryRoomDatabase extends RoomDatabase {
     public abstract GroceryDao groceryDao();
     public abstract CartDao cartDao();
