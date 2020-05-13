@@ -5,4 +5,10 @@
     <string name="itemPrice_text">$3.50</string>
     <string name="optionsMenu_Cart_Title">Cart</string>
     <string name="cartCheckoutButton_text">Checkout</string>
+    <string name="name_SettingSummary">Enter your name</string>
+    <string name="address_SettingSummary">Your mailing address</string>
+    <string name="card_SettingSummary">Your credit card information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

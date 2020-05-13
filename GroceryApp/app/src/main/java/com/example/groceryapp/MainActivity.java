@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 goToCart();
                 return true;
             case R.id.action_settings:
-                Toast.makeText(this, "Clicked on Settings", Toast.LENGTH_SHORT).show();
+                goToSettings();
                 return true;
             default:
                 // Do nothing
@@ -123,5 +123,10 @@ public class MainActivity extends AppCompatActivity {
     public void goToCart(){
         Intent goIntent = new Intent(this, CartActivity.class);
         startActivity(goIntent);
+    }
+
+    public void goToSettings(){
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+        startActivity(settingsIntent);
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="name_SettingsKey"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:inputType="text"
+        android:summary="@string/name_SettingSummary"
+        android:title="User Name" />
+
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="user_AddressKey"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:inputType="textPostalAddress"
+        android:summary="@string/address_SettingSummary"
+        android:title="User Address" />
+
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="user_cardInfoKey"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:inputType="number"
+        android:summary="@string/card_SettingSummary"
+        android:title="Card Information" />
+</PreferenceScreen>
