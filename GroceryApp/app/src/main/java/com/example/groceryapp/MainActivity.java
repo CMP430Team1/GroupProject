@@ -6,6 +6,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,12 +30,21 @@ public class MainActivity extends AppCompatActivity {
     private GroceryViewModel mGroceryViewModel;
     //GroceryListAdapter adapter = new GroceryListAdapter(this);
 
+    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabaseReference = mDatabase.getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        for(int i = 0; i < 16; i++ ){
+            StoreItem item = new StoreItem("item " + i, i, "Fresh", "Fresh produce");
+            mDatabaseReference = mDatabase.getReference().child("item");
+            mDatabaseReference.setValue(item);
+        }
 
         /*RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final GroceryListAdapter adapter = new GroceryListAdapter(this);

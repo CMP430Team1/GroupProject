@@ -1,5 +1,6 @@
 package com.example.groceryapp;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -13,5 +14,5 @@ public class CartWithGroceryItem {
             parentColumn = "cartId",
             entityColumn = "userCartId"
     )
-    public List<GroceryItem> groceryItems;
+    public LiveData<List<GroceryItem>> groceryItems;
 }
